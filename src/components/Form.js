@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Connect } from 'react-redux'
 import Answer from './Answer'
 
 class Form extends Component {
@@ -24,25 +24,7 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    // this.setState({ showAnswer: true });
-
-    console.log(this.state);
-
-    const url = `http://localhost:3000/direction?origin=${this.state.origin.split(' ').join('+')}&destination=${this.state.destination.split(' ').join('+')}&departure_time=now
-    `
-    return fetch(url)
-    .then(resp => resp.json())
-    .then(result => {
-
-      this.setState({
-        showAnswer: true,
-        final_answer: result.final_answer,
-        summary: result.origin_summary,
-        icon: result.origin_icon
-      })
-      console.log(this.state);
-    })
-
+    this.props.createFetch();
   }
 
   render () {
@@ -77,5 +59,9 @@ class Form extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  origin: state.origin,
+  destination: state.destination
+})
 
-export default Form
+export default connect(mapStateToProps, { createFetch })(Form)
