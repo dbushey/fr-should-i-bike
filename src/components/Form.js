@@ -1,16 +1,19 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
+import Answer from './Answer'
 
 class Form extends Component {
   constructor(){
     super()
     this.state = {
-      origin: '',
-      destination: ''
+      origin: '1311 Putnam Ave',
+      destination: '81 Prospect St',
+      showAnswer: false,
+      final_answer: null,
+      summary: null,
+      icon: null
     }
   }
-
-
 
   handleChange = (e) => {
       this.setState({
@@ -21,6 +24,8 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
+    // this.setState({ showAnswer: true });
+
     console.log(this.state);
 
     const url = `http://localhost:3000/direction?origin=${this.state.origin.split(' ').join('+')}&destination=${this.state.destination.split(' ').join('+')}&departure_time=now
@@ -28,12 +33,17 @@ class Form extends Component {
     return fetch(url)
     .then(resp => resp.json())
     .then(result => {
-      console.log(result)
-         
+
+      this.setState({
+        showAnswer: true,
+        final_answer: result.final_answer,
+        summary: result.origin_summary,
+        icon: result.origin_icon
+      })
+      console.log(this.state);
     })
 
   }
-
 
   render () {
     return (
@@ -59,11 +69,10 @@ class Form extends Component {
             />
           </div>
           <br />
-              <input type="submit" value='Submit' />
-            </form>
-          </div>
-
-
+          <input type="submit" value='Submit' />
+          { this.state.showAnswer ? <Answer /> : null }
+        </form>
+      </div>
     )
   }
 }

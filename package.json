@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
+    "react-animated-weather": "^1.0.3",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
     "react-skycons": "^0.7.0"
