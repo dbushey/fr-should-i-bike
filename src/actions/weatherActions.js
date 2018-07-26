@@ -1,15 +1,16 @@
 import {  CREATE_FETCH } from './types'
 
-export const createFetch = (origin, destination) => dispatch => {
+
+export const createFetch = ({ origin, destination }) => dispatch => {
 
     const url = `http://localhost:3000/direction?origin=${origin.split(' ').join('+')}&destination=${destination.split(' ').join('+')}&departure_time=now
     `
 
-    return fetch(url)
+    fetch(url)
     .then(resp => resp.json())
     .then(answer =>
-      dispach({
-      type: FETCH_WEATHER,
+      dispatch({
+      type: CREATE_FETCH,
       payload: answer
     }))
 

@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
-import { Connect } from 'react-redux'
+import { connect } from 'react-redux'
 import Answer from './Answer'
+import { createFetch } from '../actions/weatherActions'
 
 class Form extends Component {
   constructor(){
     super()
     this.state = {
       origin: '1311 Putnam Ave',
-      destination: '81 Prospect St',
-      showAnswer: false,
-      final_answer: null,
-      summary: null,
-      icon: null
+      destination: '81 Prospect St'
     }
   }
 
@@ -24,7 +21,7 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    this.props.createFetch();
+    this.props.createFetch(this.state);
   }
 
   render () {
@@ -52,16 +49,21 @@ class Form extends Component {
           </div>
           <br />
           <input type="submit" value='Submit' />
-          { this.state.showAnswer ? <Answer /> : null }
         </form>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  origin: state.origin,
-  destination: state.destination
-})
+// const mapStateToProps = state => ({
+//   origin: state.origin,
+//   destination: state.destination
+// })
 
-export default connect(mapStateToProps, { createFetch })(Form)
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     createFetch: (location) => dispatch(createFetch)
+//   }
+// }
+console.log(connect)
+export default connect(null, { createFetch })(Form)

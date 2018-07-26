@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 // import Skycons from 'react-skycons'
 import ReactAnimatedWeather from 'react-animated-weather';
@@ -27,15 +28,18 @@ import ReactAnimatedWeather from 'react-animated-weather';
 //   color: PropTypes.string
 // };
 
+//
+
 
 class Answer extends Component {
 
   render(){
+    console.log(this.props.answer)
     return(
       <div id="results">
-        <h1>NO!</h1>
+        <h1>{this.props.answer.final_answer}</h1>
         <ReactAnimatedWeather
-          icon={'RAIN'}
+          icon={'PARTLY_CLOUDY_DAY'}
           color={'blue'}
           size={200}
           animate={true}
@@ -45,4 +49,8 @@ class Answer extends Component {
   }
 }
 
-export default Answer
+function mapStateToProps(state){
+  return {answer: state.answer}
+}
+
+export default connect(mapStateToProps)(Answer)
