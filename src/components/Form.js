@@ -7,8 +7,22 @@ class Form extends Component {
   constructor(){
     super()
     this.state = {
-      origin: '1311 Putnam Ave',
-      destination: '81 Prospect St'
+      origin: {
+        name: '',
+        street_address: '',
+        city: '',
+        state: '',
+        zip_code: '',
+        googleMapLink: ''
+      },
+      destination: {
+        name: '',
+        street_address: '',
+        city: '',
+        state: '',
+        zip_code: '',
+        googleMapLink: ''
+      }
     }
   }
 
@@ -20,7 +34,6 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-
     this.props.createFetch(this.state);
   }
 
@@ -29,27 +42,95 @@ class Form extends Component {
       <div>
         <h1>Should I Bike Today?</h1>
         <br />
+        <h1>Add Origin</h1>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label> Origin: </label>
-            <input onChange={this.handleChange}
-              type="text"
-              name="origin"
-              value={this.state.origin}
-            />
-          </div>
+          <input id="autocomplete"
+            className="input-field"
+            ref="input"
+          type="text"/>
+          {/* // this is the input field used specifically for autocomplete
+            // note that it doesn't respond to changes in state,
+            // nor does it change state
+            // it's just talking to the Google Maps API
+            // I've given it an id so we can reference it when we
+          // instantiate the Google Autocomplete box */}
+          <input
+            name={"name"}
+            value={this.state.name}
+            placeholder={"Name"}
+            onChange={this.handleChange}
+          />
+          <input
+            name={"street_address"}
+            value={this.state.street_address}
+            placeholder={"Street Address"}
+            onChange={this.handleChange}
+          />
+          <input
+            name={"city"}
+            value={this.state.city}
+            placeholder={"City"}
+            onChange={this.handleChange}
+          />
+          <input
+            name={"state"}
+            value={this.state.state}
+            placeholder={"State"}
+            onChange={this.handleChange}
+          />
+          <input
+            name={"zip_code"}
+            value={this.state.zip_code}
+            placeholder={"Zipcode"}
+            onChange={this.handleChange}
+          />
           <br />
-          <div>
-            <label> Destination </label>
-            <input onChange={this.handleChange}
-              type="text"
-              name="destination"
-              value={this.state.destination}
+
+          <h1>Add Destination</h1>
+            <input id="autocomplete"
+              className="input-field"
+              ref="input"
+            type="text"/>
+            {/* // this is the input field used specifically for autocomplete
+              // note that it doesn't respond to changes in state,
+              // nor does it change state
+              // it's just talking to the Google Maps API
+              // I've given it an id so we can reference it when we
+            // instantiate the Google Autocomplete box */}
+            <input
+              name={"name"}
+              value={this.state.name}
+              placeholder={"Name"}
+              onChange={this.handleChange}
             />
-          </div>
-          <br />
-          <input type="submit" value='Submit' />
-        </form>
+            <input
+              name={"street_address"}
+              value={this.state.street_address}
+              placeholder={"Street Address"}
+              onChange={this.handleChange}
+            />
+            <input
+              name={"city"}
+              value={this.state.city}
+              placeholder={"City"}
+              onChange={this.handleChange}
+            />
+            <input
+              name={"state"}
+              value={this.state.state}
+              placeholder={"State"}
+              onChange={this.handleChange}
+            />
+            <input
+              name={"zip_code"}
+              value={this.state.zip_code}
+              placeholder={"Zipcode"}
+              onChange={this.handleChange}
+            />
+            <br />
+
+            <input type="submit" value='Submit' />
+          </form>
       </div>
     )
   }
