@@ -35,17 +35,27 @@ class Answer extends Component {
 
   render(){
     console.log(this.props.answer)
-    console.log(typeof this.props.answer.final_answer);
-    const icon = this.props.answer.origin_icon
-    console.log(typeof icon);
-    // icon.toUpperCase()
+    // {origin_icon: "PARTLY_CLOUDY_DAY",     origin_summary: "Humid and Partly Cloudy", dest_icon: "partly-cloudy-day",
+    // dest_summary: "Humid and Partly Cloudy", final_answer: "Yes"}
+
+    const {
+      answer: {
+        origin_icon,
+        origin_summary,
+        dest_icon,
+        dest_summary,
+        final_answer,
+        }
+      } = this.props;
+
+
 
     return(
       <div id="results">
-        <h1>{this.props.answer.final_answer}</h1>
+        <h1>{final_answer}</h1>
 
         <ReactAnimatedWeather
-          icon={icon}
+          icon={origin_icon}
           color={'blue'}
           size={200}
           animate={true}
