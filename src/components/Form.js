@@ -2,43 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Answer from './Answer'
 import { createFetch } from '../actions/weatherActions'
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from 'react-places-autocomplete';
 
 class Form extends Component {
   constructor(){
     super()
     this.state = {
-      origin:''
+      address:''
     }
-    // this.state = {
-    //   origin: {
-    //     name: '',
-    //     street_address: '',
-    //     city: '',
-    //     state: '',
-    //     zip_code: '',
-    //     googleMapLink: ''
-    //   },
-    //   destination: {
-    //     name: '',
-    //     street_address: '',
-    //     city: '',
-    //     state: '',
-    //     zip_code: '',
-    //     googleMapLink: ''
-    //   }
-    // }
   }
 
-  handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
-      })
-  }
+  handleChange = address => {
+   this.setState({ address });
+ };
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -51,94 +26,44 @@ class Form extends Component {
         <h1>Should I Bike Today?</h1>
         <br />
         <h1>Add Origin</h1>
-        {/* <form onSubmit={this.handleSubmit}>
-          <input id="autocomplete"
-            className="input-field"
-            ref="input"
-          type="text"/>
-          {/* // this is the input field used specifically for autocomplete
-            // note that it doesn't respond to changes in state,
-            // nor does it change state
-            // it's just talking to the Google Maps API
-            // I've given it an id so we can reference it when we
-        // instantiate the Google Autocomplete box */}
-        <input
-          name={"name"}
-          value={this.state.name}
-          placeholder={"Name"}
+        <input type="time"></input>
+        {/* <PlacesAutocomplete
+          value={this.state.address}
           onChange={this.handleChange}
-        />
-        <input
-          name={"street_address"}
-          value={this.state.street_address}
-          placeholder={"Street Address"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"city"}
-          value={this.state.city}
-          placeholder={"City"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"state"}
-          value={this.state.state}
-          placeholder={"State"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"zip_code"}
-          value={this.state.zip_code}
-          placeholder={"Zipcode"}
-          onChange={this.handleChange}
-        />
-        <br />
-
-        <h1>Add Destination</h1>
-        <input id="autocomplete"
-          className="input-field"
-          ref="input"
-        type="text"/>
-        {/* // this is the input field used specifically for autocomplete
-          // note that it doesn't respond to changes in state,
-          // nor does it change state
-          // it's just talking to the Google Maps API
-          // I've given it an id so we can reference it when we
-        // instantiate the Google Autocomplete box */}
-        <input
-          name={"name"}
-          value={this.state.name}
-          placeholder={"Name"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"street_address"}
-          value={this.state.street_address}
-          placeholder={"Street Address"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"city"}
-          value={this.state.city}
-          placeholder={"City"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"state"}
-          value={this.state.state}
-          placeholder={"State"}
-          onChange={this.handleChange}
-        />
-        <input
-          name={"zip_code"}
-          value={this.state.zip_code}
-          placeholder={"Zipcode"}
-          onChange={this.handleChange}
-        />
-        <br />
-
-        <input type="submit" value='Submit' />
-      </form> */}
+          >
+          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+            <div>
+          <input
+          {...getInputProps({
+          placeholder: 'Search Places ...',
+          className: 'location-search-input',
+          })}
+          />
+          <div className="autocomplete-dropdown-container">
+          {loading && <div>Loading...</div>}
+          {suggestions.map(suggestion => {
+          const className = suggestion.active
+          ? 'suggestion-item--active'
+          : 'suggestion-item';
+          // inline style for demonstration purpose
+          const style = suggestion.active
+          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+          : { backgroundColor: '#ffffff', cursor: 'pointer' };
+          return (
+          <div
+          {...getSuggestionItemProps(suggestion, {
+          className,
+          style,
+          })}
+          >
+          <span>{suggestion.description}</span>
+          </div>
+          );
+          })}
+          </div>
+            </div>
+          )}
+        </PlacesAutocomplete> */}
       </div>
     )
   }
