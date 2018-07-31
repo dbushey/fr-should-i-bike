@@ -8,6 +8,7 @@ class Form extends Component {
     super()
     this.state = {
       origin: '1311 Putnam Ave',
+      departure_time: '',
       destination: '81 Prospect St'
     }
   }
@@ -20,6 +21,23 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state.departure_time);
+
+    const hour = this.state.departure_time.slice(0,2)
+    console.log(hour);
+    const min = this.state.departure_time.slice(3,5)
+    console.log(min);
+
+    const today = new Date();
+
+    const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0).toString().split('-')
+
+    console.log(myToday[0]);
+
+    const unix_time = Date.parse(myToday[0])
+    console.log(unix_time);
+
+
 
     this.props.createFetch(this.state);
   }
@@ -40,7 +58,16 @@ class Form extends Component {
           </div>
           <br />
           <div>
-            <label> Destination </label>
+            <label> Departure Time: </label>
+            <input onChange={this.handleChange}
+              type="time"
+              name="departure_time"
+              value={this.state.departure_time}
+            />
+          </div>
+          <br />
+          <div>
+            <label> Destination: </label>
             <input onChange={this.handleChange}
               type="text"
               name="destination"
