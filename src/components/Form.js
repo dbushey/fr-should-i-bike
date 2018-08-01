@@ -8,8 +8,9 @@ class Form extends Component {
     super()
     this.state = {
       origin: '1311 Putnam Ave',
+      destination: '81 Prospect St',
       departure_time: '',
-      destination: '81 Prospect St'
+      isSubmitted: false
     }
   }
 
@@ -19,27 +20,43 @@ class Form extends Component {
       })
   }
 
+
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.departure_time);
 
+
+
+    // Parsing time to unix epoch
     const hour = this.state.departure_time.slice(0,2)
-    console.log(hour);
     const min = this.state.departure_time.slice(3,5)
-    console.log(min);
-
     const today = new Date();
-
     const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0).toString().split('-')
+    let unix_time = Date.parse(myToday[0])
+    unix_time = unix_time.toString().slice(0,8)
+    unix_time = Number(unix_time)
 
-    console.log(myToday[0]);
+    // console.log(this.state.departure_time);
+    // console.log(hour);
+    // console.log(min);
+    // console.log(myToday[0]);
+    console.log(typeof unix_time);
+    const data = {
+      ...this.state,
+      departure_time: unix_time
+    }
 
-    const unix_time = Date.parse(myToday[0])
-    console.log(unix_time);
+    this.setState({
+      isSubmitted: !this.state.isSubmitted,
+      origin: this.state.destination,
+      destination: this.state.origin,
+      departure_time: ''
+    })
+    //
+    // document.getElementById("wayIn").value =
+    // "Check the weather for your way back";
+    //
 
-    this.state.departure_time = unix_time
-
-    this.props.createFetch(this.state);
+    this.props.createFetch(data);
   }
 
   render () {
@@ -58,15 +75,6 @@ class Form extends Component {
           </div>
           <br />
           <div>
-            <label> Departure Time: </label>
-            <input onChange={this.handleChange}
-              type="time"
-              name="departure_time"
-              value={this.state.departure_time}
-            />
-          </div>
-          <br />
-          <div>
             <label> Destination: </label>
             <input onChange={this.handleChange}
               type="text"
@@ -75,7 +83,20 @@ class Form extends Component {
             />
           </div>
           <br />
-          <input type="submit" value='Submit' />
+          <div>
+            <label> Departure Time: </label>
+            <input onChange={this.handleChange}
+              type="time"
+              name="departure_time"
+              value={this.state.departure_time}
+            />
+          </div>
+          <br />
+
+          <input type="submit"
+
+            value= {this.state.isSubmitted ? "Check the weather for your way out" : "Check the weather for your way in"}
+          />
         </form>
       </div>
     )
