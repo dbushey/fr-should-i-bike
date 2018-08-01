@@ -1,9 +1,9 @@
 import {  CREATE_FETCH } from './types'
 
 
-export const createFetch = ({ origin, destination }) => dispatch => {
+export const createFetch = ({ origin, destination, departure_time }) => dispatch => {
 
-    const url = `http://localhost:3000/direction?origin=${origin.split(' ').join('+')}&destination=${destination.split(' ').join('+')}&departure_time=now
+    const url = `http://localhost:3000/direction?origin=${origin.split(' ').join('+')}&destination=${destination.split(' ').join('+')}&departure_time=${departure_time}
     `
 
     fetch(url)

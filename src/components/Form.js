@@ -37,7 +37,7 @@ class Form extends Component {
     const unix_time = Date.parse(myToday[0])
     console.log(unix_time);
 
-
+    this.state.departure_time = unix_time
 
     this.props.createFetch(this.state);
   }
