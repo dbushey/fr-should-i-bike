@@ -8,11 +8,14 @@ export const createFetch = ({ origin, destination, departure_time }) => dispatch
 
     fetch(url)
     .then(resp => resp.json())
-    .then(answer =>
+    .then(answer => {
+      alert("Click ok to see your new answer")
       dispatch({
       type: CREATE_FETCH,
       payload: answer
-    }))
+    })
+    }
+    )
 
     // {origin: "1311 Putnam Ave",
     // destination: "81 Prospect St",
@@ -21,4 +24,12 @@ export const createFetch = ({ origin, destination, departure_time }) => dispatch
     // summary: "Humid and Mostly Cloudy",
     // icon:"partly-cloudy-day"}
 
+}
+
+
+
+export const removeAnswer = () => {
+  return {
+    type: "REMOVE_ANSWER"
+  }
 }

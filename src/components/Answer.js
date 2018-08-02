@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { removeAnswer } from '../actions/weatherActions'
 
 // import Skycons from 'react-skycons'
 import ReactAnimatedWeather from 'react-animated-weather';
@@ -33,6 +34,13 @@ import ReactAnimatedWeather from 'react-animated-weather';
 
 class Answer extends Component {
 
+
+  // componentDidUpdate(previousProps){
+  //   if (this.props.answer !== {}){
+  //     setTimeout(this.props.removeAnswer, 5000)
+  //   }
+  // }
+
   render(){
     console.log(this.props.answer)
     // {origin_icon: "PARTLY_CLOUDY_DAY",     origin_summary: "Humid and Partly Cloudy", dest_icon: "partly-cloudy-day",
@@ -56,12 +64,12 @@ class Answer extends Component {
         <h1>{final_answer}</h1>
         <h3>{origin_summary}</h3>
         <h3>{origin_temperature}</h3>
-        <ReactAnimatedWeather
+        {final_answer ? <ReactAnimatedWeather
           icon={origin_icon}
           color={'blue'}
           size={200}
           animate={true}
-        />
+                               />  : null}
       </div>
     )
   }
@@ -71,4 +79,4 @@ function mapStateToProps(state){
   return {answer: state.answer}
 }
 
-export default connect(mapStateToProps)(Answer)
+export default connect(mapStateToProps, { removeAnswer})(Answer)

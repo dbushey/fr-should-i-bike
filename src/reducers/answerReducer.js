@@ -1,7 +1,7 @@
 import {  CREATE_FETCH } from '../actions/types'
 
 const initialState = {
-  answer : {}
+  answer: {}
 }
 
 export default function(state = initialState, action){
@@ -12,6 +12,12 @@ export default function(state = initialState, action){
         ...state,
         answer: action.payload
       }
+      case "REMOVE_ANSWER":
+      console.log("in reducer");
+        return {
+          ...state,
+          answer: {}
+        }
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Answer from './Answer'
 import { createFetch } from '../actions/weatherActions'
 
+
 class Form extends Component {
   constructor(){
     super()
@@ -25,15 +26,18 @@ class Form extends Component {
     e.preventDefault()
 
 
-
     // Parsing time to unix epoch
     const hour = this.state.departure_time.slice(0,2)
     const min = this.state.departure_time.slice(3,5)
     const today = new Date();
-    const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0).toString().split('-')
+    const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), parseInt(hour) - 4
+, min, 0).toString().split('-')
+
+    let myTodayEst = myToday
     let unix_time = Date.parse(myToday[0])
+    // debugger
     unix_time = unix_time.toString().slice(0,10)
-    unix_time = Number(unix_time) 
+    unix_time = Number(unix_time)
 
     //
 
@@ -59,6 +63,7 @@ class Form extends Component {
     //
 
     this.props.createFetch(data);
+
   }
 
   render () {
