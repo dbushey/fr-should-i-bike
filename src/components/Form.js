@@ -7,8 +7,8 @@ class Form extends Component {
   constructor(){
     super()
     this.state = {
-      origin: '1311 Putnam Ave',
-      destination: '81 Prospect St',
+      origin: '',
+      destination: '',
       departure_time: '',
       isSubmitted: false
     }
@@ -32,14 +32,16 @@ class Form extends Component {
     const today = new Date();
     const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, min, 0).toString().split('-')
     let unix_time = Date.parse(myToday[0])
-    unix_time = unix_time.toString().slice(0,8)
-    unix_time = Number(unix_time)
+    unix_time = unix_time.toString().slice(0,10)
+    unix_time = Number(unix_time) 
 
-    // console.log(this.state.departure_time);
-    // console.log(hour);
-    // console.log(min);
-    // console.log(myToday[0]);
-    console.log(typeof unix_time);
+    //
+
+    console.log(this.state.departure_time);
+    console.log(hour);
+    console.log(min);
+    console.log(myToday[0]);
+    console.log(unix_time);
     const data = {
       ...this.state,
       departure_time: unix_time

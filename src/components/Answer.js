@@ -42,6 +42,7 @@ class Answer extends Component {
       answer: {
         origin_icon,
         origin_summary,
+        origin_temperature,
         dest_icon,
         dest_summary,
         final_answer,
@@ -53,7 +54,8 @@ class Answer extends Component {
     return(
       <div id="results">
         <h1>{final_answer}</h1>
-
+        <h3>{origin_summary}</h3>
+        <h3>{origin_temperature}</h3>
         <ReactAnimatedWeather
           icon={origin_icon}
           color={'blue'}
